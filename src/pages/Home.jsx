@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import NavBar from "../components/NavBar"
+import SoundCard from '../components/SoundCard'
+
+const SOUND_IDS = [126152, 467129, 346562]
 
 function Home() {
     return (
@@ -7,10 +10,11 @@ function Home() {
         <NavBar />
         <main>
             <h1>Ambiently.....</h1>
-            <nav>
-                <Link to="/sounds">To sound Enviroments</Link>
-                <Link to="/about">Learn more about Ambiently.</Link>
-            </nav>
+            <div className="sound-list">
+                {SOUND_IDS.map(id => (
+                    <SoundCard key={id} id={id} />
+                ))}
+            </div>
         </main>
         </>
     )
