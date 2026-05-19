@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
 
-const useFetchedAudio = (url) =>{
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const useFetchedAudio = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetchAudio = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAudio();
+  }, [url]);
 
-    useEffect(() =>{
-        const fetchAudio = async() => {
-        try {
-            const response = await fetch(url);
-            if(!response.ok) throw new Error('Network response was not ok');
-            const result = await response.json();
-            setData(result);
-        } catch(err) {
-            setError(err.message)
-        } finally {
-            setLoading(false);
-        }
-        }
-    fetchAudio();  
-    }, [url])
+  return { data, loading, error };
+};
 
-    return {data, loading, error};
-}
-
-export default useFetchedAudio
+export default useFetchedAudio;

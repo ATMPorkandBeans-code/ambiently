@@ -1,10 +1,12 @@
 
 
-export function AudioPlayer({ url }){ 
+function AudioPlayer({ previewUrl, audioRef }){ 
     return (
         <div className="audio-player">
             <h1>Hello!</h1>
-        <audio src={url} controls loop />
+        <audio ref={audioRef} src={previewUrl} controls loop />
         </div>
     )
 }
+
+export default AudioPlayer
