@@ -1,16 +1,33 @@
-# React + Vite
+Ambiently — Discover and stream ambient soundscapes powered by the Freesound API.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SUMMARY:
+As a studier, background noise is essential for focus.
+YouTube ambient videos work — but they're clunky, ad-laden, and not customizable.
+So I built a clean, dedicated app to host curated Sound Environments — no distractions.
 
-Currently, two official plugins are available:
+FEATURES:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Hosts 8 curated relaxing soundscapes to study/relax to. Each sound environment features a looped audio track.
+2. Sleep Timer feature lets the user control a Timer function to stop the Audio player after it is finished.
+3. Filter each sound by keyword.
+4. Search page gives you access to a paginated list of all the sounds on FreeSound API, also with a filter function. After previewing a sound, you can save it in session to the homepage and it becomes another SoundEnvironment.
 
-## React Compiler
+TECH STACK:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. React/React-Router
+2. Freesound public API
 
-## Expanding the ESLint configuration
+INSTALLATION:
+git clone https://github.com/ATMPorkandBeans-code/ambiently.git
+cd ambiently
+npm install
+npm start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+API KEY SETUP:
+
+1. Get a free API key at freesound.org/apiv2/apply
+2. Create a .env file in the root of the project
+3. Add: REACT_APP_FREESOUND_API_KEY=your_key_here
+
+HOW IT WORKS:
+Explore the sound environments from the Home page and click on each to play and set a Timer. About section provides a brief explanation of the App, and the Search page gives the user access to all of the Freesound API resources. Each sound from the Search page can be previewed and saved to the Home page as a new Sound Environment.

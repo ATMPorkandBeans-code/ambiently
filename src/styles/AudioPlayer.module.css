@@ -1,0 +1,178 @@
+/* AudioPlayer.module.css */
+
+.audioPlayer {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 2rem;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.03)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.28),
+    inset 0 0 24px rgba(255, 255, 255, 0.02);
+}
+
+.glow {
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  border-radius: 50%;
+
+  background: rgba(125, 211, 252, 0.08);
+
+  filter: blur(80px);
+
+  top: -80px;
+  right: -40px;
+
+  pointer-events: none;
+}
+
+.header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+.label {
+  margin-bottom: 0.4rem;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  background:
+    linear-gradient(
+      to right,
+      #ffffff,
+      #c4b5fd,
+      #7dd3fc
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  padding: 0.55rem 0.9rem;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.85rem;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #7dd3fc;
+
+  animation: pulse 1.8s infinite;
+}
+
+.playerContainer {
+  position: relative;
+  z-index: 2;
+}
+
+.audio {
+  width: 100%;
+
+  border-radius: 18px;
+
+  opacity: 0.92;
+
+  filter:
+    drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+.helperText {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 1.25rem;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  line-height: 1.7;
+
+  font-size: 0.95rem;
+}
+
+/* Pulse Animation */
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .audioPlayer {
+    padding: 1.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}

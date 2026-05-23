@@ -1,19 +1,48 @@
 import NavBar from "../components/NavBar";
+import styles from "../styles/About.module.css";
 
 function About() {
-    return (
-        <>
-            <NavBar />
-            <main>
-                <h1>About Ambiently</h1>
-                <p>
-                    Ambiently is a React application that hosts a variety of sound enviroments for users to 
-                    listen to as they are trying to relax or study. Test each enviroment to see which one works
-                    for your current mood and then leave on in the background to let your brain fall into the moment.
-                </p>
-            </main>
-        </>
-    )
+  return (
+    <>
+      <NavBar />
+
+      <main className={styles.main}>
+        <div className={styles.glow}></div>
+
+        <section className={styles.aboutCard}>
+          <span className={styles.tag}>
+            Relax • Focus • Drift
+          </span>
+
+          <h1 className={styles.title}>
+            About Ambiently
+          </h1>
+
+          <p className={styles.description}>
+            Ambiently is an immersive sound environment experience designed to
+            help you slow down, focus, study, meditate, or simply exist in a
+            calmer space for a while.
+          </p>
+
+          <p className={styles.description}>
+            Explore peaceful environments like rainfall, ocean waves, crackling
+            fireplaces, and other atmospheric soundscapes curated to help your
+            mind settle into the present moment.
+          </p>
+
+          <p className={styles.description}>
+            Whether you need background ambience while working, a calming space
+            while reading, or gentle audio to unwind at night, Ambiently gives
+            you a simple escape into sound.
+          </p>
+
+          <div className={styles.quote}>
+            “Put on a soundscape. Breathe deeper. Stay awhile.”
+          </div>
+        </section>
+      </main>
+    </>
+  );
 }
 
-export default About
+export default About;

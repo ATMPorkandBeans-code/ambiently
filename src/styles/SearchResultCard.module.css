@@ -1,0 +1,314 @@
+/* SearchResultCard.module.css */
+
+.card {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 220px;
+
+  padding: 1.4rem;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.03)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.24),
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
+
+  transition:
+    transform 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(125, 211, 252, 0.16);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(125, 211, 252, 0.06);
+}
+
+.glow {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background: rgba(125, 211, 252, 0.08);
+
+  filter: blur(60px);
+
+  top: -50px;
+  right: -30px;
+
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-block;
+
+  margin-bottom: 0.8rem;
+
+  padding: 0.35rem 0.7rem;
+
+  border-radius: 999px;
+
+  background: rgba(125, 211, 252, 0.12);
+
+  border: 1px solid rgba(125, 211, 252, 0.18);
+
+  color: #ccecff;
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  color: white;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+.creator {
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 0.85rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.4rem;
+
+  margin-bottom: 1.25rem;
+}
+
+.tag {
+  padding: 0.35rem 0.55rem;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 0.68rem;
+}
+
+.actions {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.75rem;
+}
+
+/* Buttons */
+
+.previewButton,
+.saveButton,
+.confirmButton,
+.cancelButton {
+  width: 100%;
+
+  padding: 0.75rem 0.85rem;
+
+  border-radius: 14px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Preview */
+
+.previewButton {
+  border: none;
+
+  color: white;
+
+  background: linear-gradient(
+    to right,
+    rgba(125, 211, 252, 0.18),
+    rgba(196, 181, 253, 0.18)
+  );
+}
+
+.previewButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(125, 211, 252, 0.12);
+}
+
+/* Save */
+
+.saveButton,
+.confirmButton {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.saveButton:hover,
+.confirmButton:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Cancel */
+
+.cancelButton {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.cancelButton:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Save Panel */
+
+.savePanel {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
+
+  padding: 0.9rem;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  animation: fadeIn 0.25s ease;
+}
+
+.input {
+  width: 100%;
+
+  padding: 0.8rem 0.9rem;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: white;
+
+  outline: none;
+
+  font-size: 0.9rem;
+
+  transition:
+    border 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.input:focus {
+  border-color: rgba(125, 211, 252, 0.22);
+
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.08);
+}
+
+.saveActions {
+  display: flex;
+
+  gap: 0.6rem;
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.2rem;
+
+    min-height: auto;
+  }
+
+  .title {
+    font-size: 1.15rem;
+  }
+
+  .saveActions {
+    flex-direction: column;
+  }
+}

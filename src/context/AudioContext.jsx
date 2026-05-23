@@ -1,14 +1,24 @@
-// import { createContext, useContext } from "react";
-// import useFetchedAudio from "../hooks/fetchAudio";
+import { createContext, useContext, useState } from "react";
 
-// const AudioCtx = createContext(null)
+const AudioContext = createContext()
 
-// export function AudioProvider({ children }) {
-//     const audio = useAudio() //fetches data, loading and error from fetchAudio hook
+export function AudioProvider({ children }) {
+    const [savedSounds, setSavedSounds] = useState([])
 
-//     return (
-//         <AudioCtx.Provider value={audio}>
-//             {children}
-//         </AudioCtx.Provider>
-//     );
-// };
+    const addSound = (sound, customName) => {
+        setSavedSounds(prev => {
+            if(prev.find(s => s.id === sound.id)) return prev
+            return [...prev, {...sound, name: customName}]
+        })
+    }
+
+    return (
+        <AudioContext.Provider value={{ savedSounds, addSound}}>
+            {children}
+        </AudioContext.Provider>
+    )
+}
+
+export function useAudio() {
+    return useContext(AudioContext)
+}

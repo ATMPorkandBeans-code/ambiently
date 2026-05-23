@@ -1,0 +1,160 @@
+/* Home.module.css */
+
+.main {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 4rem 2rem;
+
+  background:
+    radial-gradient(circle at top, rgba(120, 119, 198, 0.25), transparent 35%),
+    linear-gradient(to bottom, #08121f, #0f1c2e, #16263b);
+
+  color: #f5f7fb;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0)
+    );
+
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
+
+.hero {
+  width: 100%;
+  max-width: 900px;
+
+  text-align: center;
+  z-index: 2;
+
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  margin-bottom: 1rem;
+
+  background: linear-gradient(to right, #dbeafe, #c4b5fd, #7dd3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 0 30px rgba(125, 211, 252, 0.25);
+}
+
+.subtitle {
+  max-width: 650px;
+
+  margin: 0 auto 2.5rem auto;
+
+  font-size: 1.1rem;
+  line-height: 1.8;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 1rem 1.25rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+  font-size: 1rem;
+
+  outline: none;
+
+  backdrop-filter: blur(14px);
+
+  transition: all 0.25s ease;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.searchInput:focus {
+  border-color: rgba(125, 211, 252, 0.45);
+
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 252, 0.08),
+    0 10px 40px rgba(0, 0, 0, 0.25);
+
+  transform: translateY(-2px);
+}
+
+.soundSection {
+  width: 100%;
+  max-width: 1100px;
+
+  z-index: 2;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.soundCount {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+}
+
+.soundGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .main {
+    padding: 2rem 1.25rem;
+  }
+
+  .hero {
+    margin-top: 1.5rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

@@ -1,37 +1,65 @@
-import { useState } from 'react'
+import { useState } from "react";
+import styles from "../styles/SleepTimer.module.css";
 
 function SleepTimer({ onStart }) {
-    const [showPicker, setShowPicker] = useState(false)
-    const [inputMinutes, setInputMinutes] = useState('')
+  const [showPicker, setShowPicker] = useState(false);
+  const [inputMinutes, setInputMinutes] = useState("");
 
-    const handleStart = () => {
-        const seconds = Number(inputMinutes) * 60
-        if (!seconds) return
-        onStart(seconds)
-        setShowPicker(false)
-        setInputMinutes('')
-    }
+  const handleStart = () => {
+    const seconds = Number(inputMinutes) * 60;
 
-    return (
-        <div className="sleep-timer">
-            {!showPicker ? (
-                <button onClick={() => setShowPicker(true)}>
-                    Set Sleep Timer
-                </button>
-            ) : (
-                <div className='timer-picker'>
-                    <input
-                    type='number'
-                    placeholder='Minutes'
-                    value={inputMinutes}
-                    onChange={(e) => setInputMinutes(e.target.value)}
-                    />
-                    <button onClick={handleStart}>Start</button>
-                    <button onClick={() => setShowPicker(false)}>Cancel</button>
-                    </div>
-            )}
-            </div>    
-    )
+    if (!seconds) return;
+
+    onStart(seconds);
+
+    setShowPicker(false);
+    setInputMinutes("");
+  };
+
+  return (
+    <div className={styles.sleepTimer}>
+      {!showPicker ? (
+        <button
+          className={styles.openButton}
+          onClick={() => setShowPicker(true)}
+        >
+          Set Sleep Timer
+        </button>
+      ) : (
+        <div className={styles.timerPicker}>
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>
+              Timer Duration
+            </label>
+
+            <input
+              type="number"
+              placeholder="Enter minutes..."
+              value={inputMinutes}
+              onChange={(e) => setInputMinutes(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.buttonGroup}>
+            <button
+              className={styles.startButton}
+              onClick={handleStart}
+            >
+              Start Timer
+            </button>
+
+            <button
+              className={styles.cancelButton}
+              onClick={() => setShowPicker(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default SleepTimer
+export default SleepTimer;

@@ -10,15 +10,15 @@ function useSleepTimer(onExpire) {
     setTimerActive(true);
   }
 
-  function pauseTimer(){
-    clearInterval(intervalRef.current)
-    setTimerActive(false)
+  function pauseTimer() {
+    clearInterval(intervalRef.current);
+    setTimerActive(false);
   }
 
-  function cancelTimer(){
-    clearInterval(intervalRef.current)
-    setTimerActive(false)
-    setTimeRemaining(null)
+  function cancelTimer() {
+    clearInterval(intervalRef.current);
+    setTimerActive(false);
+    setTimeRemaining(null);
   }
 
   useEffect(() => {
@@ -37,14 +37,13 @@ function useSleepTimer(onExpire) {
     return () => clearInterval(intervalRef.current);
   }, [timerActive, timeRemaining]);
 
-
-return {
+  return {
     timeRemaining,
     timerActive,
     startTimer,
     pauseTimer,
-    cancelTimer
-}
+    cancelTimer,
+  };
 }
 
-export default useSleepTimer
+export default useSleepTimer;

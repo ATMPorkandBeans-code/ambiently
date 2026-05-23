@@ -1,0 +1,135 @@
+/* About.module.css */
+
+.main {
+  min-height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem 1.5rem;
+
+  background:
+    radial-gradient(circle at top, rgba(125, 211, 252, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(196, 181, 253, 0.12), transparent 35%),
+    linear-gradient(to bottom, #08121f, #0f1c2e, #16263b);
+
+  color: white;
+}
+
+.glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  background: rgba(125, 211, 252, 0.08);
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+
+  top: -120px;
+  right: -120px;
+
+  pointer-events: none;
+}
+
+.aboutCard {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 820px;
+
+  padding: 3.5rem;
+
+  border-radius: 32px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    inset 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+.tag {
+  display: inline-block;
+
+  margin-bottom: 1.25rem;
+  padding: 0.45rem 0.9rem;
+
+  border-radius: 999px;
+
+  background: rgba(125, 211, 252, 0.12);
+
+  border: 1px solid rgba(125, 211, 252, 0.18);
+
+  color: #c4e7ff;
+
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 700;
+
+  margin-bottom: 2rem;
+
+  line-height: 1.1;
+
+  background: linear-gradient(to right, #ffffff, #c4b5fd, #7dd3fc);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-size: 1.08rem;
+  line-height: 1.9;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  margin-bottom: 1.5rem;
+}
+
+.quote {
+  margin-top: 3rem;
+
+  padding-top: 2rem;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  font-size: 1.1rem;
+  font-style: italic;
+
+  color: rgba(255, 255, 255, 0.65);
+
+  text-align: center;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .aboutCard {
+    padding: 2rem;
+    border-radius: 24px;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .quote {
+    font-size: 1rem;
+  }
+}

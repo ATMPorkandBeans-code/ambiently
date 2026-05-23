@@ -1,0 +1,206 @@
+/* SleepTimer.module.css */
+
+.sleepTimer {
+  width: 100%;
+}
+
+/* Initial Button */
+
+.openButton {
+  width: 100%;
+
+  padding: 1rem 1.2rem;
+
+  border: 1px solid rgba(125, 211, 252, 0.14);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(125, 211, 252, 0.12),
+      rgba(196, 181, 253, 0.12)
+    );
+
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(14px);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.openButton:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(125, 211, 252, 0.18),
+      rgba(196, 181, 253, 0.18)
+    );
+
+  box-shadow:
+    0 10px 30px rgba(125, 211, 252, 0.12);
+}
+
+/* Expanded Timer Panel */
+
+.timerPicker {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding: 1.5rem;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  animation: fadeIn 0.3s ease;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+.input {
+  width: 100%;
+
+  padding: 1rem 1.1rem;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: white;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition:
+    border 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.input:focus {
+  border-color: rgba(125, 211, 252, 0.25);
+
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 252, 0.08);
+
+  transform: translateY(-1px);
+}
+
+/* Buttons */
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.startButton,
+.cancelButton {
+  flex: 1;
+
+  padding: 0.95rem 1rem;
+
+  border-radius: 16px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Start Button */
+
+.startButton {
+  border: none;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(125, 211, 252, 0.18),
+      rgba(196, 181, 253, 0.18)
+    );
+
+  color: white;
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(125, 211, 252, 0.14);
+}
+
+/* Cancel Button */
+
+.cancelButton {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cancelButton:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column;
+  }
+}
