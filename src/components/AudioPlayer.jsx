@@ -7,13 +7,9 @@ function AudioPlayer({ previewUrl, audioRef }) {
 
       <div className={styles.header}>
         <div>
-          <p className={styles.label}>
-            Ambient Playback
-          </p>
+          <p className={styles.label}>Ambient Playback</p>
 
-          <h2 className={styles.title}>
-            Audio Controls
-          </h2>
+          <h2 className={styles.title}>Audio Controls</h2>
         </div>
 
         <div className={styles.status}>
@@ -33,8 +29,7 @@ function AudioPlayer({ previewUrl, audioRef }) {
       </div>
 
       <p className={styles.helperText}>
-        Press play and allow the environment to fade into the
-        background.
+        Press play and allow the environment to fade into the background.
       </p>
     </div>
   );

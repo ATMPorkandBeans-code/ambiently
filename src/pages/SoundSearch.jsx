@@ -22,22 +22,21 @@ function SoundSearch() {
 
   const { savedSounds } = useAudio();
 
+  // fetches paginated batch of sounds based on page state, hasMore, and query if not empty
   const fetchSounds = useCallback(async (searchQuery, pageNum) => {
     setLoading(true);
-
     const res = await fetch(
       `https://freesound.org/apiv2/search/text/?query=${searchQuery}&page=${pageNum}&page_size=20&fields=id,name,username,tags,previews&token=${TOKEN}`,
     );
-
     const data = await res.json();
-
+    // adds new batch of sounds to previously fetched array of sounds
     setSounds((prev) => [...prev, ...data.results]);
-
+    // checks the fetched data if .next is not none
     setHasMore(data.next !== null);
-
     setLoading(false);
   }, []);
 
+  // handles search bar queries, resets pages to 1 and reruns fetchsounds with query
   useEffect(() => {
     setSounds([]);
     setPage(1);
@@ -46,6 +45,8 @@ function SoundSearch() {
     if (query) fetchSounds(query, 1);
   }, [query, fetchSounds]);
 
+  // instantiates a new observer for sentinalRef at bottom of page, if it comes in view, it checks hasMore
+  // and loading and sets the new page to + 1, thus achieving a "endless scroll" feel
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,15 +56,22 @@ function SoundSearch() {
       },
       { threshold: 0.1 },
     );
-
     if (sentinelRef.current) observer.observe(sentinelRef.current);
-
     return () => observer.disconnect();
   }, [hasMore, loading]);
 
   useEffect(() => {
     if (page > 1) fetchSounds(query, page);
   }, [page, query, fetchSounds]);
+
+  //   If "Preview Sound clicked on SearchSoundCard, audioplayer automatically starts with sound"
+  useEffect(() => {
+    if (selectedSound) {
+      audioRef.current.play().catch((error) => {
+        console.log("Playback prevented or failed:", error);
+      });
+    }
+  }, [selectedSound]);
 
   return (
     <>

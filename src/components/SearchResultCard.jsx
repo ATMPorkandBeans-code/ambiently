@@ -5,15 +5,12 @@ import styles from "../styles/SearchResultCard.module.css";
 
 function SearchResultCard({ sound, onPlay }) {
   const [showPicker, setShowPicker] = useState(false);
-
   const [inputName, setInputName] = useState("");
-
   const { addSound } = useAudio();
 
   return (
     <div className={styles.card}>
       <div className={styles.glow}></div>
-
       <div className={styles.content}>
         <div className={styles.header}>
           <span className={styles.badge}>Community Sound</span>

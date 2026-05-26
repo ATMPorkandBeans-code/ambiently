@@ -28,9 +28,7 @@ function SleepTimer({ onStart }) {
       ) : (
         <div className={styles.timerPicker}>
           <div className={styles.inputGroup}>
-            <label className={styles.label}>
-              Timer Duration
-            </label>
+            <label className={styles.label}>Timer Duration</label>
 
             <input
               type="number"
@@ -42,10 +40,7 @@ function SleepTimer({ onStart }) {
           </div>
 
           <div className={styles.buttonGroup}>
-            <button
-              className={styles.startButton}
-              onClick={handleStart}
-            >
+            <button className={styles.startButton} onClick={handleStart}>
               Start Timer
             </button>
 
