@@ -4,6 +4,7 @@ import styles from "../styles/SleepTimer.module.css";
 function SleepTimer({ onStart }) {
   const [showPicker, setShowPicker] = useState(false);
   const [inputMinutes, setInputMinutes] = useState("");
+  const [error, setError] = useState("")
 
   const handleStart = () => {
     const seconds = Number(inputMinutes) * 60;
@@ -32,9 +33,22 @@ function SleepTimer({ onStart }) {
 
             <input
               type="number"
+              min="1"
+              step="1"
               placeholder="Enter minutes..."
               value={inputMinutes}
-              onChange={(e) => setInputMinutes(e.target.value)}
+              onKeyDown={(e) => {
+              if (["-", "+", ".", "e"].includes(e.key)) e.preventDefault();
+            }}
+            onChange={(e) => {
+              const raw = e.target.value;
+              if (raw === "" || /^\d+$/.test(raw)) {
+                setInputMinutes(raw);
+                setError("");
+              } else {
+                setError("Please enter a positive integer.");
+              }
+            }}
               className={styles.input}
             />
           </div>

@@ -2,15 +2,10 @@ import { useNavigate } from "react-router-dom";
 import useFetchedAudio from "../hooks/fetchAudio";
 import styles from "../styles/SoundCard.module.css";
 
-const TOKEN = import.meta.env.VITE_FREESOUND_TOKEN;
-const FIELDS = "id,name,duration,tags,username,previews,images,avg_rating";
-
 function SoundCard({ id, name }) {
   const navigate = useNavigate();
 
-  const url = `https://freesound.org/apiv2/sounds/${id}/?fields=${FIELDS}&token=${TOKEN}`;
-
-  const { data, loading, error } = useFetchedAudio(url);
+  const { data, loading, error } = useFetchedAudio(`/sounds/${id}`);
 
   if (loading)
     return (

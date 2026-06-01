@@ -5,45 +5,42 @@ import NavBar from "../components/NavBar";
 import { useAudio } from "../context/AudioContext";
 import styles from "../styles/SoundSearch.module.css";
 
-const TOKEN = import.meta.env.VITE_FREESOUND_TOKEN;
-
 function SoundSearch() {
   const [query, setQuery] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
   const [sounds, setSounds] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
-
   const sentinelRef = useRef(null);
-
   const [selectedSound, setSelectedSound] = useState(null);
-
   const audioRef = useRef(null);
-
   const { savedSounds } = useAudio();
 
   // fetches paginated batch of sounds based on page state, hasMore, and query if not empty
   const fetchSounds = useCallback(async (searchQuery, pageNum) => {
     setLoading(true);
     const res = await fetch(
-      `https://freesound.org/apiv2/search/text/?query=${searchQuery}&page=${pageNum}&page_size=20&fields=id,name,username,tags,previews&token=${TOKEN}`,
+      `/sounds/search?query=${searchQuery}&page=${pageNum}`,
     );
     const data = await res.json();
-    // adds new batch of sounds to previously fetched array of sounds
+
     setSounds((prev) => [...prev, ...data.results]);
-    // checks the fetched data if .next is not none
+
     setHasMore(data.next !== null);
     setLoading(false);
   }, []);
 
-  // handles search bar queries, resets pages to 1 and reruns fetchsounds with query
-  useEffect(() => {
+  const handleSearch = () => {
+    setSubmittedQuery(query);
     setSounds([]);
     setPage(1);
     setHasMore(true);
 
-    if (query) fetchSounds(query, 1);
-  }, [query, fetchSounds]);
+    if (query) {
+      fetchSounds(submittedQuery, 1);
+    }
+  };
 
   // instantiates a new observer for sentinalRef at bottom of page, if it comes in view, it checks hasMore
   // and loading and sets the new page to + 1, thus achieving a "endless scroll" feel
@@ -62,7 +59,7 @@ function SoundSearch() {
 
   useEffect(() => {
     if (page > 1) fetchSounds(query, page);
-  }, [page, query, fetchSounds]);
+  }, [page, fetchSounds]);
 
   //   If "Preview Sound clicked on SearchSoundCard, audioplayer automatically starts with sound"
   useEffect(() => {
@@ -101,10 +98,14 @@ function SoundSearch() {
             <input
               type="text"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                console.log(query);
+              }}
               placeholder="Search rain, forest, cafe, ocean..."
               className={styles.searchInput}
             />
+            <button onClick={handleSearch}>Filter Sounds</button>
           </div>
         </section>
 

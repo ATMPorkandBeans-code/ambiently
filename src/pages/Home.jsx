@@ -75,7 +75,7 @@ function Home() {
     </div>
     <div className={styles.soundGrid}>
       {savedSounds.map((sound) => (
-        <SoundCard key={sound.id} id={sound.id} name={sound.name} />
+        <SoundCard key={sound.freesound_id} id={sound.freesound_id} name={sound.name} />
       ))}
     </div>
   </section>

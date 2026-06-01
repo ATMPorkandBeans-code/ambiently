@@ -1,6 +1,5 @@
 import { useAudio } from "../context/AudioContext";
 import { useState } from "react";
-
 import styles from "../styles/SearchResultCard.module.css";
 
 function SearchResultCard({ sound, onPlay }) {
@@ -32,7 +31,6 @@ function SearchResultCard({ sound, onPlay }) {
           <button className={styles.previewButton} onClick={onPlay}>
             Preview Sound
           </button>
-
           {!showPicker ? (
             <button
               className={styles.saveButton}
@@ -56,7 +54,7 @@ function SearchResultCard({ sound, onPlay }) {
                   onClick={() => {
                     if (!inputName.trim()) return;
 
-                    addSound(sound, inputName);
+                    addSound(sound.id, inputName);
 
                     setShowPicker(false);
                     setInputName("");

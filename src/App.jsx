@@ -9,7 +9,7 @@ function App() {
 
   return (
     <AudioProvider>
-    <BrowserRouter basename="/ambiently">
+    <BrowserRouter basename="/">
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sound/:id" element={<SoundEnviroment />} />
