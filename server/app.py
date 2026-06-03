@@ -1,43 +1,86 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-
+from config import app, api, db, bcrypt
 import requests
-from flask import Flask, jsonify, request, make_response, render_template
-from flask_migrate import Migrate
-from flask_restful import Api, Resource
-from models import db, SavedSound
+from sqlalchemy.exc import IntegrityError
+from flask import jsonify, request, make_response, session
+from flask_restful import Resource
+from models import User, UserSchema, Sound, SoundSchema
 
-app = Flask(__name__)
+class Signup(Resource):
+    def post(self):
+        request_json = request.get_json()
+        username = request_json.get('username')
+        password = request_json.get('password')
+        user = User(
+            username=username
+        )
+        user.password_hash = password
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+        try:
+            db.session.add(user)
+            db.session.commit()
+            return UserSchema().dump(user), 201
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
+        
+class CheckSession(Resource):
+    def get(self):
+        if session.get('user_id'):
+            user = User.query.filter(User.id == session['user_id']).first()
+            return UserSchema().dump(user), 200
+        
+        return {'error': '401 Unauthorized'}, 401
+    
+class Login(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        password = request.get_json()['password']
 
-migrate = Migrate(app, db)
-db.init_app(app)
+        user = User.query.filter(User.username == username).first()
+        if user and user.authenticate(password):
+            session['user_id'] = user.id
+            return UserSchema().dump(user), 200
+        
+        return {'error': '401 Unauthorized'}, 401
+    
+class Logout(Resource):
+    def delete(self):
+        if session.get('user_id'):
+            session['user_id'] = None
+            return {}, 204
+        return {'error': '401 Unauthorized'}, 401
 
 
-api = Api(app)
 
 class Sounds(Resource):
-
     def get(self):
-        sounds = [sound.to_dict() for sound in SavedSound.query.all()]
-        return make_response(jsonify(sounds), 200)
+        user_id = session.get('user_id')
+        if user_id:
+            sounds = Sound.query.filter_by(user_id=user_id).all()
+            return SoundSchema(many=True).dump(sounds), 200
+        return {'error': '401 Unauthorized'}, 401
+  
     
     def post(self):
-        data = request.get_json()
+        user_id = session.get('user_id')
+        if user_id:
+            data = request.get_json()
+            sound = Sound(
+                freesound_id = data['freesound_id'],
+                name = data['name'],
+                user_id = user_id
+            )
+            try:
+                db.session.add(sound)
+                db.session.commit()
+                return SoundSchema().dump(sound), 201
+            except IntegrityError:
+                return {'error': '422 Unprocessable Entity'}, 422
+        else:
+            return {'error': '401 Unauthorized'}, 401
 
-        new_sound = SavedSound(
-            freesound_id = data['freesound_id'],
-            name = data['name']
-        )
-
-        db.session.add(new_sound)
-        db.session.commit()
-
-        return make_response(new_sound.to_dict(), 201)
     
 class SoundById(Resource):
     def get(self, freesound_id):
@@ -81,10 +124,10 @@ class SoundSearch(Resource):
         
         return response.json(), 200
 
-
-
-
-    
+api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Sounds, '/sounds')
 api.add_resource(SoundById, '/sounds/<int:freesound_id>')
 api.add_resource(SoundSearch, '/sounds/search')

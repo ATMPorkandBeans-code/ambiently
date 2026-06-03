@@ -100,12 +100,11 @@ function SoundSearch() {
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
-                console.log(query);
               }}
               placeholder="Search rain, forest, cafe, ocean..."
               className={styles.searchInput}
             />
-            <button onClick={handleSearch}>Filter Sounds</button>
+            <button className={styles.filterButton} onClick={handleSearch}>Filter Sounds</button>
           </div>
         </section>
 

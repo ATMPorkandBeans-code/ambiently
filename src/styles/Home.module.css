@@ -12,8 +12,10 @@
   padding: 4rem 2rem;
 
   background:
-    radial-gradient(circle at top, rgba(120, 119, 198, 0.25), transparent 35%),
-    linear-gradient(to bottom, #08121f, #0f1c2e, #16263b);
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(244, 114, 182, 0.13), transparent),
+    radial-gradient(ellipse 70% 50% at 80% 5%, rgba(56, 189, 248, 0.10), transparent),
+    radial-gradient(ellipse 60% 40% at 50% 90%, rgba(139, 92, 246, 0.09), transparent),
+    linear-gradient(to bottom, #060d1a, #0d1629, #131e36);
 
   color: #f5f7fb;
 }
@@ -21,13 +23,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-
-  background:
-    linear-gradient(
-      rgba(255, 255, 255, 0.03),
-      rgba(255, 255, 255, 0)
-    );
-
+  background: linear-gradient(rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
   backdrop-filter: blur(2px);
   pointer-events: none;
 }
@@ -35,37 +31,31 @@
 .hero {
   width: 100%;
   max-width: 900px;
-
   text-align: center;
   z-index: 2;
-
   margin-top: 3rem;
   margin-bottom: 4rem;
 }
 
 .title {
-  font-size: clamp(4rem, 10vw, 7rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
 
-  background: linear-gradient(to right, #dbeafe, #c4b5fd, #7dd3fc);
+  background: linear-gradient(135deg, #fecdd3 0%, #e879f9 30%, #a78bfa 65%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  text-shadow: 0 0 30px rgba(125, 211, 252, 0.25);
+  filter: drop-shadow(0 0 40px rgba(232, 121, 249, 0.30));
 }
 
 .subtitle {
-  max-width: 650px;
-
+  max-width: 600px;
   margin: 0 auto 2.5rem auto;
-
   font-size: 1.1rem;
-  line-height: 1.8;
-
-  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.85;
+  color: rgba(219, 214, 254, 0.78);
 }
 
 .searchContainer {
@@ -75,70 +65,128 @@
 
 .searchInput {
   width: 100%;
-  max-width: 420px;
-
-  padding: 1rem 1.25rem;
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
-
-  background: rgba(255, 255, 255, 0.08);
-
+  max-width: 440px;
+  padding: 1rem 1.4rem;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 20px;
+  background: rgba(12, 18, 42, 0.55);
   color: white;
   font-size: 1rem;
-
   outline: none;
-
-  backdrop-filter: blur(14px);
-
+  backdrop-filter: blur(16px);
   transition: all 0.25s ease;
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(196, 181, 253, 0.45);
 }
 
 .searchInput:focus {
-  border-color: rgba(125, 211, 252, 0.45);
-
+  border-color: rgba(167, 139, 250, 0.50);
   box-shadow:
-    0 0 0 4px rgba(125, 211, 252, 0.08),
-    0 10px 40px rgba(0, 0, 0, 0.25);
-
+    0 0 0 4px rgba(167, 139, 250, 0.10),
+    0 10px 40px rgba(0, 0, 0, 0.30);
   transform: translateY(-2px);
 }
 
 .soundSection {
   width: 100%;
   max-width: 1100px;
-
   z-index: 2;
+  margin-bottom: 3rem;
 }
 
 .sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.12);
 }
 
 .sectionTitle {
   font-size: 1.5rem;
-  font-weight: 600;
-
-  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
+  color: rgba(233, 228, 255, 0.94);
+  letter-spacing: -0.01em;
 }
 
 .soundCount {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.95rem;
+  color: rgba(196, 181, 253, 0.70);
+  font-size: 0.88rem;
+  background: rgba(139, 92, 246, 0.12);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, 0.18);
 }
 
 .soundGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+}
+
+/* Login Prompt */
+
+.loginPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  background: rgba(12, 18, 42, 0.45);
+  border: 1px solid rgba(167, 139, 250, 0.14);
+  backdrop-filter: blur(16px);
+  color: rgba(196, 181, 253, 0.80);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.loginLink {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.38), rgba(56, 189, 248, 0.30));
+  border: 1px solid rgba(167, 139, 250, 0.42);
+  color: #e9d5ff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.loginLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.22);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.55), rgba(56, 189, 248, 0.45));
+}
+
+/* Empty State */
+
+.emptyMessage {
+  text-align: center;
+  padding: 2.5rem;
+  color: rgba(196, 181, 253, 0.65);
+  font-size: 1rem;
+  line-height: 1.8;
+  border-radius: 20px;
+  background: rgba(12, 18, 42, 0.35);
+  border: 1px dashed rgba(167, 139, 250, 0.18);
+}
+
+.emptyMessage a {
+  color: #a78bfa;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.emptyMessage a:hover {
+  text-decoration: underline;
 }
 
 /* Mobile */

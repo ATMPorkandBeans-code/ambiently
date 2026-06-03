@@ -1,18 +1,19 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useUser } from "./UserContext";
 
 const SoundsContext = createContext();
 
 export function AudioProvider({ children }) {
   const [savedSounds, setSavedSounds] = useState([]);
+  const { user } = useUser()
 
   useEffect(() => {
-    fetch("/sounds")
-      .then((r) => r.json())
-      .then((soundsArray) => {
-        setSavedSounds(soundsArray);
-      });
-  }, []);
-
+    if (user) {
+      setSavedSounds(user.sounds || [])
+    } else {
+      setSavedSounds([])
+    }
+  }, [user]);
 
   const addSound = (freesound_id, name) => {
     fetch("/sounds", {
@@ -20,9 +21,9 @@ export function AudioProvider({ children }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body :JSON.stringify({freesound_id, name}),
+      body: JSON.stringify({ freesound_id, name }),
     })
-    .then ((r) => r.json())
+    .then((r) => r.json())
     .then(newSound => {
       setSavedSounds(prev => [...prev, newSound])
     })

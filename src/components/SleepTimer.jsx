@@ -38,19 +38,20 @@ function SleepTimer({ onStart }) {
               placeholder="Enter minutes..."
               value={inputMinutes}
               onKeyDown={(e) => {
-              if (["-", "+", ".", "e"].includes(e.key)) e.preventDefault();
-            }}
-            onChange={(e) => {
-              const raw = e.target.value;
-              if (raw === "" || /^\d+$/.test(raw)) {
-                setInputMinutes(raw);
-                setError("");
-              } else {
-                setError("Please enter a positive integer.");
-              }
-            }}
-              className={styles.input}
+                if (["-", "+", ".", "e"].includes(e.key)) e.preventDefault();
+              }}
+              onChange={(e) => {
+                const raw = e.target.value;
+                if (raw === "" || /^\d+$/.test(raw)) {
+                  setInputMinutes(raw);
+                  setError("");
+                } else {
+                  setError("Please enter a positive integer.");
+                }
+              }}
+              className={`${styles.input} ${error ? styles.inputError : ""}`}
             />
+            {error && <p className={styles.error}>{error}</p>}
           </div>
 
           <div className={styles.buttonGroup}>

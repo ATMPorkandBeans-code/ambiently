@@ -1,4 +1,6 @@
 import { useAudio } from "../context/AudioContext";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from "../styles/SearchResultCard.module.css";
 
@@ -6,6 +8,16 @@ function SearchResultCard({ sound, onPlay }) {
   const [showPicker, setShowPicker] = useState(false);
   const [inputName, setInputName] = useState("");
   const { addSound } = useAudio();
+  const { user } = useUser();
+  const navigate = useNavigate();
+
+  function handleSaveClick() {
+    if (!user) {
+      navigate('/login')
+    } else {
+      setShowPicker(true)
+    }
+  }
 
   return (
     <div className={styles.card}>
@@ -34,7 +46,7 @@ function SearchResultCard({ sound, onPlay }) {
           {!showPicker ? (
             <button
               className={styles.saveButton}
-              onClick={() => setShowPicker(true)}
+              onClick={handleSaveClick}
             >
               Save Custom Sound
             </button>
@@ -53,9 +65,7 @@ function SearchResultCard({ sound, onPlay }) {
                   className={styles.confirmButton}
                   onClick={() => {
                     if (!inputName.trim()) return;
-
                     addSound(sound.id, inputName);
-
                     setShowPicker(false);
                     setInputName("");
                   }}

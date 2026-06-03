@@ -85,7 +85,7 @@ function SoundEnvironment() {
           <section className={styles.timerSection}>
             <h2 className={styles.sectionTitle}>Sleep Timer</h2>
 
-            <SleepTimer onStart={startTimer} />
+            {!timerActive && <SleepTimer onStart={startTimer} />}
 
             {timeRemaining !== null && (
               <div className={styles.countdownWrapper}>

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import SoundCard from "../components/SoundCard";
 import styles from "../styles/Home.module.css";
-import { useAudio } from "../context/AudioContext"
+import { useAudio } from "../context/AudioContext";
+import { useUser } from "../context/UserContext";
 
 const SOUND_IDS = [
   [126152, "Beach"],
@@ -17,12 +19,12 @@ const SOUND_IDS = [
 
 function Home() {
   const [filter, setFilter] = useState("");
+  const { savedSounds } = useAudio()
+  const { user } = useUser()
 
   const filteredSounds = SOUND_IDS.filter((sound) =>
     sound[1].toLowerCase().includes(filter.toLowerCase()),
   );
-
-  const { savedSounds } = useAudio()
 
   return (
     <>
@@ -53,7 +55,6 @@ function Home() {
         <section className={styles.soundSection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Choose Your Environment</h2>
-
             <span className={styles.soundCount}>
               {filteredSounds.length} ambient spaces
             </span>
@@ -65,21 +66,39 @@ function Home() {
             ))}
           </div>
         </section>
-        {savedSounds.length > 0 && (
-  <section className={styles.soundSection}>
-    <div className={styles.sectionHeader}>
-      <h2 className={styles.sectionTitle}>Your Saved Sounds</h2>
-      <span className={styles.soundCount}>
-        {savedSounds.length} saved
-      </span>
-    </div>
-    <div className={styles.soundGrid}>
-      {savedSounds.map((sound) => (
-        <SoundCard key={sound.freesound_id} id={sound.freesound_id} name={sound.name} />
-      ))}
-    </div>
-  </section>
-)}
+
+        <section className={styles.soundSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Your Saved Sounds</h2>
+            {user && (
+              <span className={styles.soundCount}>
+                {savedSounds.length} saved
+              </span>
+            )}
+          </div>
+
+          {user ? (
+            savedSounds.length > 0 ? (
+              <div className={styles.soundGrid}>
+                {savedSounds.map((sound) => (
+                  <SoundCard key={sound.freesound_id} id={sound.freesound_id} name={sound.name} />
+                ))}
+              </div>
+            ) : (
+              <p className={styles.emptyMessage}>
+                You haven't saved any sounds yet. Head to <Link to="/search">Search</Link> to find some!
+              </p>
+            )
+          ) : (
+            <div className={styles.loginPrompt}>
+              <p>Sign in to save your own ambient sounds.</p>
+              <Link to="/login" className={styles.loginLink}>
+                Login / Sign Up
+              </Link>
+            </div>
+          )}
+        </section>
+
       </main>
     </>
   );
