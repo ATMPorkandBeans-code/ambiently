@@ -15,11 +15,11 @@ function About() {
           </span>
 
           <h1 className={styles.title}>
-            About Ambiently
+            About Ambient
           </h1>
 
           <p className={styles.description}>
-            Ambiently is an immersive sound environment experience designed to
+            Ambient is an immersive sound environment experience designed to
             help you slow down, focus, study, meditate, or simply exist in a
             calmer space for a while.
           </p>
@@ -32,7 +32,7 @@ function About() {
 
           <p className={styles.description}>
             Whether you need background ambience while working, a calming space
-            while reading, or gentle audio to unwind at night, Ambiently gives
+            while reading, or gentle audio to unwind at night, Ambient gives
             you a simple escape into sound.
           </p>
 

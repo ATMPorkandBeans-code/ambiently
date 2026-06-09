@@ -85,9 +85,25 @@ function SoundEnvironment() {
           <section className={styles.timerSection}>
             <h2 className={styles.sectionTitle}>Sleep Timer</h2>
 
-            {!timerActive && <SleepTimer onStart={startTimer} />}
+            {!timerActive && timeRemaining !== 0 && (
+              <SleepTimer onStart={startTimer} />
+            )}
 
-            {timeRemaining !== null && (
+            {timeRemaining === 0 && !timerActive ? (
+              <div className={styles.countdownWrapper}>
+                <div className={styles.sessionComplete}>
+                  <div className={styles.sessionGlow}></div>
+                  <span className={styles.sessionCheck}>✓</span>
+                  <p className={styles.sessionLabel}>Session Complete</p>
+                  <button
+                    className={styles.dismissButton}
+                    onClick={cancelTimer}
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            ) : timeRemaining !== null && (
               <div className={styles.countdownWrapper}>
                 <Countdown
                   timeRemaining={timeRemaining}

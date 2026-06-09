@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import styles from "../styles/NavBar.module.css";
+import ambientLogoNav from "../assets/ambient_logo_nav.svg";
 
 function NavBar() {
   const { user, logout } = useUser();
@@ -19,7 +20,9 @@ function NavBar() {
   return (
     <header className={styles.header}>
       <nav className={styles.navbar}>
-        <div className={styles.logo}>Ambiently</div>
+        <div className={styles.logo}>
+          <img src={ambientLogoNav} alt="Ambient" className={styles.logoImg} />
+        </div>
 
         <button
           className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ""}`}

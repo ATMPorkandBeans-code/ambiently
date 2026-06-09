@@ -5,6 +5,7 @@ import SoundCard from "../components/SoundCard";
 import styles from "../styles/Home.module.css";
 import { useAudio } from "../context/AudioContext";
 import { useUser } from "../context/UserContext";
+import ambientLogo from "../assets/ambient_logo.svg";
 
 const SOUND_IDS = [
   [126152, "Beach"],
@@ -34,7 +35,7 @@ function Home() {
         <div className={styles.overlay}></div>
 
         <section className={styles.hero}>
-          <h1 className={styles.title}>Ambiently</h1>
+          <img src={ambientLogo} alt="Ambient" className={styles.heroLogo} />
 
           <p className={styles.subtitle}>
             Drift into immersive sound environments designed for focus,
@@ -44,7 +45,7 @@ function Home() {
           <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="Search environments..."
+              placeholder="Filter environments..."
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               className={styles.searchInput}

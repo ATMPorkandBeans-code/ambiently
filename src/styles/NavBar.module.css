@@ -28,16 +28,14 @@
 }
 
 .logo {
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+}
 
-  background: linear-gradient(135deg, #fda4af, #e879f9, #a78bfa, #38bdf8);
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  filter: drop-shadow(0 0 16px rgba(232, 121, 249, 0.35));
+.logoImg {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 0 16px rgba(155, 107, 255, 0.4));
 }
 
 .navLinks {
@@ -122,8 +120,8 @@
     padding: 0.85rem 1rem;
   }
 
-  .logo {
-    font-size: 1.1rem;
+  .logoImg {
+    height: 36px;
   }
 
   .navbar {

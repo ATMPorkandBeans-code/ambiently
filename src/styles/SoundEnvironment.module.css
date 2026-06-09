@@ -148,6 +148,94 @@
   margin-top: 1.5rem;
 }
 
+.sessionComplete {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 28px;
+  text-align: center;
+
+  background: rgba(8, 12, 32, 0.62);
+  border: 1px solid rgba(110, 231, 183, 0.20);
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  animation: fadeInUp 0.4s ease;
+}
+
+.sessionGlow {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.18), rgba(56, 189, 248, 0.06) 60%, transparent 80%);
+  filter: blur(70px);
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.sessionCheck {
+  position: relative;
+  z-index: 2;
+  font-size: 2.5rem;
+  color: #6ee7b7;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sessionLabel {
+  position: relative;
+  z-index: 2;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6ee7b7;
+  letter-spacing: -0.01em;
+}
+
+.dismissButton {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(110, 231, 183, 0.28);
+  background: rgba(52, 211, 153, 0.12);
+  color: #6ee7b7;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.dismissButton:hover {
+  background: rgba(52, 211, 153, 0.22);
+  border-color: rgba(110, 231, 183, 0.50);
+  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
 .emptyState {
   min-height: 100vh;
   display: flex;

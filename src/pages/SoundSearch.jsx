@@ -104,7 +104,9 @@ function SoundSearch() {
               placeholder="Search rain, forest, cafe, ocean..."
               className={styles.searchInput}
             />
-            <button className={styles.filterButton} onClick={handleSearch}>Filter Sounds</button>
+            <button className={styles.filterButton} onClick={handleSearch}>
+              Search Sounds
+            </button>
           </div>
         </section>
 
