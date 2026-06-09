@@ -21,7 +21,7 @@ function SoundSearch() {
   const fetchSounds = useCallback(async (searchQuery, pageNum) => {
     setLoading(true);
     const res = await fetch(
-      `/sounds/search?query=${searchQuery}&page=${pageNum}`,
+      `${import.meta.env.VITE_API_URL}/sounds/search?query=${searchQuery}&page=${pageNum}`,
     );
     const data = await res.json();
 

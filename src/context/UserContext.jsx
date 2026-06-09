@@ -6,7 +6,9 @@ export function UserProvider({ children }) {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        fetch('/check_session')
+        fetch(`${import.meta.env.VITE_API_URL}/check_session`, {
+            credentials: 'include'
+        })
             .then(res => {
                 if (res.ok) {
                     return res.json()
@@ -19,9 +21,10 @@ export function UserProvider({ children }) {
     }, [])
 
     function signup(username, password) {
-        return fetch('/signup', {
+        return fetch(`${import.meta.env.VITE_API_URL}/signup`, {
             method: 'POST',
             headers: { "Content-Type": 'application/json'},
+            credentials: 'include',
             body: JSON.stringify({ username, password })
         })
         .then(res => {
@@ -34,9 +37,10 @@ export function UserProvider({ children }) {
     }
 
     function login(username, password) {
-        return fetch('/login', {
+        return fetch(`${import.meta.env.VITE_API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
+            credentials: 'include',
             body: JSON.stringify({ username, password })
         })
         .then (res => {
@@ -49,8 +53,9 @@ export function UserProvider({ children }) {
     }
 
     function logout() {
-        return fetch('/logout', {
-            method: 'DELETE'
+        return fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+            method: 'DELETE',
+            credentials: 'include'
         })
         .then(res => {
             if (res.ok) {
