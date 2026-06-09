@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 from flask import Flask
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
@@ -12,7 +13,13 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'   # required for cross-origin cookies
+app.config['SESSION_COOKIE_SECURE'] = True        # required when SameSite=None
 app.json.compact = False
+
+CORS(app, supports_credentials=True, origins=[
+    "https://atmporkandBeans-code.github.io"   # your GitHub Pages URL
+])
 
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
