@@ -12,7 +12,7 @@ function App() {
   return (
     <UserProvider>
     <AudioProvider>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/ambiently">
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
