@@ -5,7 +5,7 @@ import styles from "../styles/SoundCard.module.css";
 function SoundCard({ id, name }) {
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetchedAudio(`/sounds/${id}`);
+  const { data, loading, error } = useFetchedAudio(`${import.meta.env.VITE_API_URL}/sounds/${id}`);
 
   if (loading)
     return (

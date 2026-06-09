@@ -16,11 +16,12 @@ export function AudioProvider({ children }) {
   }, [user]);
 
   const addSound = (freesound_id, name) => {
-    fetch("/sounds", {
+    fetch(`${import.meta.env.VITE_API_URL}/sounds`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify({ freesound_id, name }),
     })
     .then((r) => r.json())
