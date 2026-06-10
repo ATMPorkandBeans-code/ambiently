@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import SoundCard from "../components/SoundCard";
@@ -7,24 +7,25 @@ import { useAudio } from "../context/AudioContext";
 import { useUser } from "../context/UserContext";
 import ambientLogo from "../assets/ambient_logo.svg";
 
-const SOUND_IDS = [
-  [126152, "Beach"],
-  [467129, "Fireplace"],
-  [346562, "Rain"],
-  [265567, "Crickets"],
-  [410742, "Birds"],
-  [577846, "Thunderstorm"],
-  [733199, "Stream"],
-  [156414, "Desert Wind"],
-];
 
 function Home() {
   const [filter, setFilter] = useState("");
+  const [curatedSounds, setCuratedSounds] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { savedSounds } = useAudio()
   const { user } = useUser()
 
-  const filteredSounds = SOUND_IDS.filter((sound) =>
-    sound[1].toLowerCase().includes(filter.toLowerCase()),
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/curated-sounds`)
+    .then((r) => r.json())
+    .then((data) => {
+      setCuratedSounds(data);
+      setLoading(false)
+    });
+  }, []);
+
+  const filteredSounds = curatedSounds.filter((sound) =>
+    sound.custom_name.toLowerCase().includes(filter.toLowerCase()),
   );
 
   return (
@@ -61,11 +62,19 @@ function Home() {
             </span>
           </div>
 
-          <div className={styles.soundGrid}>
-            {filteredSounds.map((id) => (
-              <SoundCard key={id[0]} id={id[0]} name={id[1]} />
-            ))}
-          </div>
+          {loading ? (
+            <p className={styles.emptyMessage}>Loading environments...</p>
+          ) : (
+            <div className={styles.soundGrid}>
+              {filteredSounds.map((sound) => (
+                <SoundCard
+                  key={sound.id}
+                  id={sound.id}
+                  name={sound.custom_name}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className={styles.soundSection}>

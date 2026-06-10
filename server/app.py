@@ -1,12 +1,23 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from config import app, api, db, bcrypt
+from config import app, api, db, bcrypt, cache
 import requests
 from sqlalchemy.exc import IntegrityError
 from flask import jsonify, request, make_response, session
 from flask_restful import Resource
 from models import User, UserSchema, Sound, SoundSchema
+
+CURATED_SOUNDS = [
+    {"id": 126152, "name": "Beach"},
+    {"id": 467129, "name": "Fireplace"},
+    {"id": 346562, "name": "Rain"},
+    {"id": 265567, "name": "Crickets"},
+    {"id": 410742, "name": "Birds"},
+    {"id": 577846, "name": "Thunderstorm"},
+    {"id": 733199, "name": "Stream"},
+    {"id": 156414, "name": "Desert Wind"},
+]
 
 class Signup(Resource):
     def post(self):
@@ -51,6 +62,27 @@ class Logout(Resource):
             session['user_id'] = None
             return {}, 204
         return {'error': '401 Unauthorized'}, 401
+    
+class CuratedSounds(Resource):
+    @cache.cached(timeout=3600, key_prefix='curated_sounds')
+    def get(self):
+        token = os.environ.get("FREESOUND_TOKEN")
+        results = []
+
+        for sound in CURATED_SOUNDS:
+            response = requests.get(
+                f"https://freesound.org/apiv2/sounds/{sound['id']}",
+                params={
+                    "fields": "id,name,duration,tags,username,previews,images,avg_rating",
+                    "token": token
+                }
+            )
+            if response.status_code == 200:
+                data = response.json()
+                data['custom_name'] = sound['name']
+                results.append(data)
+
+        return results, 200
 
 
 
@@ -128,6 +160,7 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
+api.add_resource(CuratedSounds, '/curated-sounds')
 api.add_resource(Sounds, '/sounds')
 api.add_resource(SoundById, '/sounds/<int:freesound_id>')
 api.add_resource(SoundSearch, '/sounds/search')
