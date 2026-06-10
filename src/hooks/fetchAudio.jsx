@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 
 const useFetchedAudio = (url) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!url ? false : true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!url) return;
     const fetchAudio = async () => {
       try {
         const response = await fetch(url);

@@ -2,10 +2,14 @@ import { useNavigate } from "react-router-dom";
 import useFetchedAudio from "../hooks/fetchAudio";
 import styles from "../styles/SoundCard.module.css";
 
-function SoundCard({ id, name }) {
+function SoundCard({ id, name, data: propData }) {
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetchedAudio(`${import.meta.env.VITE_API_URL}/sounds/${id}`);
+  const { data: fetchedData, loading, error } = useFetchedAudio(
+  propData ? null : `${import.meta.env.VITE_API_URL}/sounds/${id}`
+);
+
+  const data = propData || fetchedData;
 
   if (loading)
     return (

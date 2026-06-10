@@ -71,6 +71,7 @@ function Home() {
                   key={sound.id}
                   id={sound.id}
                   name={sound.custom_name}
+                  data={sound}
                 />
               ))}
             </div>
