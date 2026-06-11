@@ -155,6 +155,10 @@ class SoundSearch(Resource):
             return {"error": "Freesound API error"}, response.status_code
         
         return response.json(), 200
+    
+class Ping(Resource):
+    def get(self):
+        return {"status": "ok"}, 200
 
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -164,7 +168,7 @@ api.add_resource(CuratedSounds, '/curated-sounds')
 api.add_resource(Sounds, '/sounds')
 api.add_resource(SoundById, '/sounds/<int:freesound_id>')
 api.add_resource(SoundSearch, '/sounds/search')
-
+api.add_resource(Ping, '/ping')
 
 if __name__ == '__main__':
     app.run(debug=True)
